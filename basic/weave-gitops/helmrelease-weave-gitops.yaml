@@ -1,0 +1,19 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: weave-gitops
+  namespace: flux-system
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: oci-repo-weave-gitops
+    namespace: flux-system
+  interval: 24h0m0s
+  releaseName: weave-gitops
+  storageNamespace: flux-system
+  targetNamespace: flux-system
+  valuesFrom:
+    - kind: ConfigMap
+      name: values-weave-gitops
+      valuesKey: values.yaml
