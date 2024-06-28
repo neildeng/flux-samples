@@ -1,0 +1,46 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-auth
+  namespace: flux-system
+data:
+  password: MXFhekBXU1gzZWRjCg==
+  username: YWRtaW4=
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Provider
+metadata:
+  name: grafana
+  namespace: flux-system
+spec:
+  type: grafana
+  address: "http://grafana.observability.svc/api/annotations"
+  secretRef:
+    name: grafana-auth
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Alert
+metadata:
+  name: alert-to-grafana
+  namespace: flux-system
+spec:
+  providerRef:
+    name: grafana
+  eventSeverity: info
+  eventSources:
+    - kind: 'HelmRelease'
+      name: '*'
+      namespace: flux-system
+    - kind: 'HelmChart'
+      name: '*'
+      namespace: flux-system
+    - kind: 'GitRepository'
+      name: '*'
+      namespace: flux-system
+    - kind: 'OCIRepository'
+      name: '*'
+      namespace: flux-system
+    - kind: 'Kustomization'
+      name: '*'
+      namespace: flux-system

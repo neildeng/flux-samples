@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - notification.yaml
+  - podmonitor.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    grafana_dashboard: ""
+configMapGenerator:
+  - namespace: observability
+    name: dashboard-flux2
+    files:
+      - Flux2.json
+      - Flux2-log.json
