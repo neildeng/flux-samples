@@ -1,0 +1,13 @@
+---
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: tf-helloworld
+  namespace: flux-system
+spec:
+  path: ./
+  interval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: git-repo-helloworld
+    namespace: flux-system

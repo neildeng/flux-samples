@@ -1,0 +1,11 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: git-repo-helloworld
+  namespace: flux-system
+spec:
+  interval: 24h
+  url: https://github.com/tf-controller/helloworld
+  ref:
+    branch: main

@@ -1,0 +1,9 @@
+awsPackage:
+  install: false
+
+metrics:
+  # -- Enable Metrics Service
+  enabled: true
+  serviceMonitor:
+    # -- Enable ServiceMonitor
+    enabled: true
